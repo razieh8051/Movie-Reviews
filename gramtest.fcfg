@@ -1,0 +1,142 @@
+#Note: This is not the same feature grammar used in our code
+#The main grammar is not public
+SG -> S[MOOD=?m]
+S[MOOD=dec, +pp] -> NP[AGR=?a, -obj] VP[AGR=?a, OBJC=?o] PP
+S[MOOD=dec, -pp] -> NP[AGR=?a, -obj] VP[AGR=?a, OBJC=?o] 
+S[MOOD=yn, +pp] -> V[AGR=?a, MTF=?mtf, +aux, -imp] NP[AGR=?a, -obj] VF[FORM=infinitive, AGR=?a] PP
+S[MOOD=yn, -pp] -> V[AGR=?a, MTF=?mtf, +aux, -imp] NP[AGR=?a, -obj] VF[FORM=infinitive, AGR=?a] 
+S[MOOD=yn, +pp] -> d[AGR=?a] NP[AGR=?a, -obj] VF[FORM=infinitive, AGR=?a] PP
+S[MOOD=yn, -pp] -> d[AGR=?a] NP[AGR=?a, -obj] VF[FORM=infinitive, AGR=?a] 
+S[MOOD=yn, +pp] -> pt_verb_will NP[AGR=?a, -obj] VF[FORM=infinitive, AGR=?a] PP
+S[MOOD=yn, -pp] -> pt_verb_will NP[AGR=?a, -obj] VF[FORM=infinitive, AGR=?a] 
+S[MOOD=yn, -pp] -> h[AGR=?a] NP[AGR=?a, -obj] VF[FORM=pastparticiple, AGR=?a] PP
+S[MOOD=yn, +pp] -> h[AGR=?a] NP[AGR=?a, -obj] VF[FORM=pastparticiple, AGR=?a] 
+S[MOOD=yn, +pp] -> pt_verb_had NP[AGR=?a, -obj] VF[FORM=pastparticiple, AGR=?a] PP
+S[MOOD=yn, -pp] -> pt_verb_had NP[AGR=?a, -obj] VF[FORM=pastparticiple, AGR=?a] 
+S[MOOD=yn, +pp] -> Be[TNS=?tp, AGR=?a] NP[AGR=?a, -obj] VF[FORM=pastparticiple, AGR=?a] PP
+S[MOOD=yn, -pp] -> Be[TNS=?tp, AGR=?a] NP[AGR=?a, -obj] VF[FORM=pastparticiple, AGR=?a] 
+S[MOOD=yn, +pp] -> pt_verb_will NP[AGR=?a, -obj] pt_verb_be VF[FORM=pastparticiple, AGR=?a] PP
+S[MOOD=yn, -pp] -> pt_verb_will NP[AGR=?a, -obj] pt_verb_be VF[FORM=pastparticiple, AGR=?a] 
+S[MOOD=yn, +pp] -> h[AGR=?a] NP[AGR=?a, -obj] pt_verb_been VF[FORM=pastparticiple, AGR=?a] PP
+S[MOOD=yn, -pp] -> h[AGR=?a] NP[AGR=?a, -obj] pt_verb_been VF[FORM=pastparticiple, AGR=?a] 
+S[MOOD=yn, +pp] -> pt_verb_had NP[AGR=?a, -obj] pt_verb_been VF[FORM=pastparticiple, AGR=?a] PP
+S[MOOD=yn, -pp] -> pt_verb_had NP[AGR=?a, -obj] pt_verb_been VF[FORM=pastparticiple, AGR=?a] 
+S[MOOD=wh, +pp] -> pt_adv_wh S[MOOD=yn]
+S[MOOD=imp, +pp] -> pt_verb_do NP[AGR=?a, -obj] PP
+S[MOOD=imp, -pp] -> pt_verb_do NP[AGR=?a, -obj] 
+S[MOOD=imp, +pp] -> VF[FORM=infinitive, AGR=?a] NP[AGR=?a, -obj] PP
+S[MOOD=imp, -pp] -> VF[FORM=infinitive, AGR=?a] NP[AGR=?a, -obj] 
+S[MOOD=imp, +pp] -> Det[AGR=[NUM=?n, PER=2], -obj] V[AGR=?a, MTF=?mtf, +aux, +imp] VF[FORM=infinitive, AGR=?a] NP[AGR=?a, -obj] PP
+S[MOOD=imp, -pp] -> Det[AGR=[NUM=?n, PER=2], -obj] V[AGR=?a, MTF=?mtf, +aux, +imp] VF[FORM=infinitive, AGR=?a] NP[AGR=?a, -obj] 
+
+VP[AGR=?a, OBJC=indirect] -> V[AGR=?a, MTF=?mtf, +aux, -imp] OB[TYPE=?t] 
+VP[AGR=?a, OBJC=indirect] -> V[AGR=?a, MTF=?mtf, +aux, +imp] OB[TYPE=?t] 
+VP[AGR=?a, OBJC=indirect] -> V[AGR=?a, MTF=?mtf, -aux] OB[TYPE=?t] 
+VP[AGR=?a, OBJC=direct] -> V[AGR=?a, MTF=?mtf, +aux, +imp] OB[TYPE=?t] 
+VP[AGR=?a, OBJC=direct] -> V[AGR=?a, MTF=?mtf, +aux, -imp] OB[TYPE=?t] 
+VP[AGR=?a, OBJC=direct] -> V[AGR=?a, MTF=?mtf, -aux] OB[TYPE=?t] 
+OB[TYPE=argument]-> NP[AGRobj=?aobj, +obj]
+OB[TYPE=ppo] -> pt_verb_cpp NP[AGRobj=?aobj, +obj]
+VP[AGR=?a, OBJC=noObject] -> V[AGR=?a, MTF=?mtf, -aux] 
+VP[AGR=?a, OBJC=noObject] -> V[AGR=?a, MTF=?mtf, +aux, -imp] 
+VP[AGR=?a, OBJC=noObject] -> V[AGR=?a, MTF=?mtf, +aux, +imp] 
+
+
+V[AGR=?a, MTF=?mtf, +aux, +imp] -> "must" | "should" 
+V[AGR=?a, MTF=?mtf, +aux, -imp] -> "must" | "should" | "might" |  "would" | "could" | "can" | "may" | pt_verb_will | pt_verb_shall
+V[AGR=?a, MTF=[MODE=active,TENSE=simplepast], -aux] -> VF[FORM=simplepast, AGR=?a]
+V[AGR=?a, MTF=[MODE=active,TENSE=simplepresent], -aux] -> VF[FORM=simplepresent, AGR=?a]
+V[AGR=?a, MTF=[MODE=active,TENSE=pastperfect], -aux] -> H[AGR=?a] VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=active,TENSE=futureperfect], -aux] -> pt_verb_auxfp H[AGR=?a] VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=active,TENSE=pluperfect], -aux] -> pt_verb_had VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=active,TENSE=simplefututre], -aux] -> pt_verb_will VF[FORM=infinitive, AGR=?a]
+V[AGR=?a, MTF=[MODE=passive,TENSE=simplepast], -aux] -> Be[TNS=past, AGR=?a] VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=passive,TENSE=simplepresent], -aux] -> Be[TNS=present, AGR=?a] VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=passive,TENSE=pastperfect], -aux] -> H[AGR=?a] pt_verb_been VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=passive,TENSE=futureperfect], -aux] -> pt_verb_auxfp H[AGR=?a] pt_verb_been VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=passive,TENSE=pluperfect], -aux] -> pt_verb_had pt_verb_been VF[FORM=pastparticiple, AGR=?a]
+V[AGR=?a, MTF=[MODE=passive,TENSE=simplefututre], -aux] -> pt_verb_will t_verb_be VF[FORM=pastparticiple, AGR=?a]
+
+VF[FORM=simplepast, AGR=?a] -> pt_verb_simpas
+pt_verb_simpas -> "walked" | "went" | "was" | "were" | "invented"
+VF[FORM='pastparticiple', AGR=?a] -> pt_verb_paspar
+pt_verb_paspar -> "sold" | "gone" | "given" | "lived" | "born"
+VF[FORM=infinitive, AGR=?a] -> pt_verb_infinitive
+VF[FORM=infinitive, AGR=?a] -> pt_verb_infinitive OB[TYPE=?t] 
+
+VF[FORM=simplepresent, AGR=[NUM=sg, PER=3]] -> pt_verb_simppres3
+VF[FORM=simplepresent, AGR=[NUM=sg, PER=1]] -> pt_verb_infinitive
+VF[FORM=simplepresent, AGR=[NUM=sg, PER=2]] -> pt_verb_infinitive
+VF[FORM=simplepresent, AGR=[NUM=pl, PER=3]] -> pt_verb_infinitive
+VF[FORM=simplepresent, AGR=[NUM=pl, PER=1]] -> pt_verb_infinitive
+VF[FORM=simplepresent, AGR=[NUM=pl, PER=2]] -> pt_verb_infinitive
+
+Be[TNS='past', AGR=[NUM=sg, PER=3]] -> pt_verb_was
+Be[TNS='past', AGR=[NUM=sg, PER=1]] -> pt_verb_was
+Be[TNS='past', AGR=[NUM=sg, PER=2]] -> pt_verb_were
+Be[TNS='past', AGR=[NUM=pl, PER=?p]] -> pt_verb_were
+Be[TNS='pres', AGR=[NUM=sg, PER=1]] -> pt_verb_am
+Be[TNS='pres', AGR=[NUM=sg, PER=3]] -> pt_verb_are
+Be[TNS='pres', AGR=[NUM=sg, PER=3]] -> pt_verb_is
+Be[TNS='pres', AGR=[NUM=pl, PER=?p]] -> pt_verb_are
+
+d[AGR=[NUM=sg, PER=1]] -> pt_verb_do
+d[AGR=[NUM=sg, PER=2]] -> pt_verb_do
+d[AGR=[NUM=sg, PER=3]] -> pt_verb_does
+d[AGR=[NUM=pl, PER=?p]] -> pt_verb_do
+d[AGR=[NUM=?n, PER=?p]] -> pt_verb_did
+h[AGR=[NUM=sg, PER=3]] -> pt_verb_has
+h[AGR=[NUM=sg, PER=1]] -> pt_verb_have
+h[AGR=[NUM=sg, PER=2]] -> pt_verb_have
+h[AGR=[NUM=pl, PER=?p]] -> pt_verb_have
+
+PP -> P NP[AGR=?a, -obj] 
+P -> "on" | "in" | "of"
+
+NP[AGR=?a, -obj] -> Det[AGR=?a, -obj] N[AGR=?a, -obj] | Det[AGR=?a, -obj]  
+NP[AGR=?a, -obj] -> PropN 
+Det[AGR=[NUM=sg, PER=3], -obj] -> "this" | "that" | "a" | "an" | "the" | "he" | "she"
+Det[AGR=[NUM=pl, PER=3], -obj] -> "these" | "those"
+Det[AGR=[NUM=sg, PER=1], -obj] -> "I"
+Det[AGR=[NUM=pl, PER=1], -obj] -> "we"
+Det[AGR=[NUM=?n, PER=2], -obj] -> "you"
+N[AGR=[NUM=sg, PER=3], -obj] -> "boy" | "meeting"| "book" | "opponent" | "house" | "door" |"revolver" | "inventor" | "harpsichord"
+
+
+NP[AGRobj=?aobj, +obj] -> Det[AGRobj=?a, +obj] N[AGRobj=?aobj, +obj] | Det[AGRobj=?aobj, +obj]
+NP[AGRobj=?aobj, +obj] -> PropN 
+Det[AGRobj=[NUMobj=sg, PERobj=3], +obj] -> "this" | "that" | "a" | "an" | "the" | "he" | "she"
+Det[AGRobj=[NUMobj=pl, PERobj=3], +obj] -> "these" | "those"
+Det[AGRobj=[NUMobj=sg, PERobj=1], +obj] -> "me"
+Det[AGRobj=[NUMobj=pl, PERobj=1], +obj] -> "us"
+Det[AGRobj=[NUM=?n, PERobj=2], +obj] -> "your"
+N[AGRobj=[NUMobj=sg, PERobj=3], +obj] -> "boy" | "meeting"| "book" | "opponent" | "house" | "door" |"revolver" | "inventor" | "harpsichord"
+ 
+PropN -> "Baikalfinansgroup" | "Sara" | "Dean" | "Rosneft" | "China"  | "Portland" | NameFamily | "Landowska" | "Robinson" | "Ireland"
+NameFamily -> FName LName
+FName -> "Michael" | "David"
+LName -> "Laski" | "Vance"
+
+
+pt_verb_cpp -> "for" | "to"
+pt_verb_do -> "do" 
+pt_verb_does -> "does"
+pt_verb_did -> "did" 
+pt_verb_infinitive -> "walk" | "go" | "meet" | "close" | "know"
+pt_adv_wh -> "why" | "where" | "when" | "who" | "what" | "which"
+pt_verb_simppres3 -> "walks" | "goes" | "is" | "are" | "am" | "lives"
+
+pt_verb_be -> "be"
+pt_verb_been -> "been"
+pt_verb_am -> "am"
+pt_verb_was -> "was"
+pt_verb_were -> "were"
+pt_verb_are -> "are"
+pt_verb_is -> "is"
+
+pt_verb_has -> "has"
+pt_verb_have -> "have"
+pt_verb_had -> "had"
+pt_verb_will -> "will"
+pt_verb_shall -> "shall" 
+pt_verb_auxfp -> pt_verb_shall | pt_verb_will
